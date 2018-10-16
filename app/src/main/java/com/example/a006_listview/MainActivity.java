@@ -7,12 +7,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private String[] paises = {"Argentina", "Chile", "Bolivia", "Paraguay", "Peru", "Ecuador", "Brasil",
-            "Colombia", "Venezuela", "Uruguay"};
-    private String[] habitantes = {"40000", "17000", "65000", "10000", "30000", "14000", "183000",
-            "44000", "29000", "85000"};
+    private List<String> paises;
+    private List<String> habitantes;
     private TextView textView;
     private ListView listView;
 
@@ -20,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        paises = new ArrayList<String>();
+        paises.add("Argentina"),("Chile"), ("Bolivia"), ("Paraguay"), ("Peru"), ("Ecuador"), ("Brasil"),
+                ("Colombia"), ("Venezuela"),("Uruguay");
+        habitantes.add("40000", "17000", "65000", "10000", "30000", "14000", "183000",
+                "44000", "29000", "85000");
         //Vincular
         textView = findViewById(R.id.textViewId);
         listView = findViewById(R.id.listViewId);
@@ -27,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, paises);
         //Enlazamos el adaptador con nuestro listView
         listView.setAdapter(adapter);
-        listView.setOnClickListener(new AdapterView.OnItemClickListener());{
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView adapter, View view, int position, long id) {
-                textView.setText("Poblacion de "+listView.getItemAtPosition(position)+" es "+ habitantes[position])})}}}
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this,"Clickeado: "+paises.get(position),Toast.LENGTH_SHORT).show();
+            }
+        });}}
